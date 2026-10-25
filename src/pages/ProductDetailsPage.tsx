@@ -3,6 +3,7 @@ import { Product } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
 import { formatINR, canExpressBuyInterest } from '../utils/rules.ts';
+import { handleImageFallback, getCategoryFallbackImage } from '../utils/imageUtils.ts';
 import {
   ArrowLeft,
   MapPin,
@@ -16,6 +17,7 @@ import {
   AlertCircle,
   Tag,
   Share2,
+  Palette,
 } from 'lucide-react';
 
 interface ProductDetailsPageProps {
@@ -281,8 +283,9 @@ export const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({
           <div className="lg:col-span-7 bg-stone-100 p-6 sm:p-10 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-stone-200">
             <div className="relative max-w-lg w-full rounded-xl overflow-hidden shadow-md bg-white border border-stone-200/80 aspect-4/3">
               <img
-                src={product.imageUrl}
+                src={product.imageUrl || getCategoryFallbackImage(product.category)}
                 alt={product.title}
+                onError={(e) => handleImageFallback(e, product.category)}
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-3 left-3 flex items-center space-x-2">
@@ -405,6 +408,14 @@ export const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({
                     <MessageSquare className="w-3.5 h-3.5 text-stone-500" />
                     <span>Chat with Seller to Coordinate</span>
                   </button>
+
+                  <button
+                    onClick={() => onNavigate('studio-3d')}
+                    className="w-full flex items-center justify-center space-x-2 py-2 px-4 bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 rounded-xl text-xs font-semibold transition-colors"
+                  >
+                    <Palette className="w-3.5 h-3.5 text-[#C85A32]" />
+                    <span>Mount on 3D Studio Easel (360° Inspection)</span>
+                  </button>
                 </>
               ) : (
                 <div className="bg-stone-100 rounded-xl p-4 text-center">
@@ -517,8 +528,9 @@ export const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({
                             className="text-[#C85A32] focus:ring-[#C85A32]"
                           />
                           <img
-                            src={item.imageUrl}
+                            src={item.imageUrl || getCategoryFallbackImage(item.category)}
                             alt={item.title}
+                            onError={(e) => handleImageFallback(e, item.category)}
                             className="w-10 h-10 object-cover rounded"
                           />
                           <div className="flex-1 min-w-0">

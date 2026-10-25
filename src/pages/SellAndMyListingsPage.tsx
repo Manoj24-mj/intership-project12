@@ -3,6 +3,7 @@ import { Product } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
 import { formatINR } from '../utils/rules.ts';
+import { handleImageFallback, getCategoryFallbackImage } from '../utils/imageUtils.ts';
 import {
   PlusCircle,
   Package,
@@ -160,10 +161,12 @@ export const SellAndMyListingsPage: React.FC<SellAndMyListingsPageProps> = ({
       return;
     }
 
-    if (!title.trim() || !description.trim() || !imageUrl.trim() || !location.trim()) {
-      setError('All fields are required.');
+    if (!title.trim() || !description.trim() || !location.trim()) {
+      setError('Title, description, and location are required.');
       return;
     }
+
+    const finalImageUrl = imageUrl.trim() || getCategoryFallbackImage(category);
 
     try {
       setIsSubmitting(true);
@@ -174,7 +177,7 @@ export const SellAndMyListingsPage: React.FC<SellAndMyListingsPageProps> = ({
           category,
           condition,
           price: numPrice,
-          imageUrl: imageUrl.trim(),
+          imageUrl: finalImageUrl,
           location: location.trim(),
         });
         setSuccess('Listing updated successfully!');
@@ -185,7 +188,7 @@ export const SellAndMyListingsPage: React.FC<SellAndMyListingsPageProps> = ({
           category,
           condition,
           price: numPrice,
-          imageUrl: imageUrl.trim(),
+          imageUrl: finalImageUrl,
           location: location.trim(),
         });
         setSuccess('Your art supplies were listed successfully in the marketplace!');
@@ -597,8 +600,9 @@ export const SellAndMyListingsPage: React.FC<SellAndMyListingsPageProps> = ({
                     >
                       <div className="flex items-center space-x-3.5 min-w-0">
                         <img
-                          src={item.imageUrl}
+                          src={item.imageUrl || getCategoryFallbackImage(item.category)}
                           alt={item.title}
+                          onError={(e) => handleImageFallback(e, item.category)}
                           className="w-14 h-14 rounded-lg object-cover shrink-0 border border-stone-200"
                         />
                         <div className="min-w-0">

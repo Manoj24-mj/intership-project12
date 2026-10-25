@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SwapRequest } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
+import { handleImageFallback, DEFAULT_ART_IMAGE } from '../utils/imageUtils.ts';
 import {
   Repeat,
   CheckCircle,
@@ -264,8 +265,9 @@ export const SwapRequestsPage: React.FC<SwapRequestsPageProps> = ({
                     {/* Item 1: Offered Item */}
                     <div className="md:col-span-5 bg-stone-50 rounded-xl p-3.5 border border-stone-200/80 flex items-center space-x-3.5">
                       <img
-                        src={swap.offeredProductImageUrl}
+                        src={swap.offeredProductImageUrl || DEFAULT_ART_IMAGE}
                         alt={swap.offeredProductTitle}
+                        onError={handleImageFallback}
                         className="w-16 h-16 rounded-lg object-cover shrink-0 border border-stone-200"
                       />
                       <div className="min-w-0">
@@ -291,8 +293,9 @@ export const SwapRequestsPage: React.FC<SwapRequestsPageProps> = ({
                     {/* Item 2: Desired Item */}
                     <div className="md:col-span-5 bg-stone-50 rounded-xl p-3.5 border border-stone-200/80 flex items-center space-x-3.5">
                       <img
-                        src={swap.requestedProductImageUrl}
+                        src={swap.requestedProductImageUrl || DEFAULT_ART_IMAGE}
                         alt={swap.requestedProductTitle}
+                        onError={handleImageFallback}
                         className="w-16 h-16 rounded-lg object-cover shrink-0 border border-stone-200"
                       />
                       <div className="min-w-0">

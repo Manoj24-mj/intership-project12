@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext.tsx';
 import { AdminStats, User, Product, Report } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { formatINR } from '../utils/rules.ts';
+import { handleImageFallback, getCategoryFallbackImage } from '../utils/imageUtils.ts';
 import {
   ShieldAlert,
   Users,
@@ -371,8 +372,9 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                 >
                   <div className="flex items-center space-x-3.5 min-w-0">
                     <img
-                      src={prod.imageUrl}
+                      src={prod.imageUrl || getCategoryFallbackImage(prod.category)}
                       alt={prod.title}
+                      onError={(e) => handleImageFallback(e, prod.category)}
                       className="w-12 h-12 rounded-lg object-cover shrink-0 border border-stone-200"
                     />
                     <div className="min-w-0">

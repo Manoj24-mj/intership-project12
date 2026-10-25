@@ -3,6 +3,7 @@ import { BuyRequest } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useAuth } from '../context/AuthContext.tsx';
 import { formatINR } from '../utils/rules.ts';
+import { handleImageFallback, DEFAULT_ART_IMAGE } from '../utils/imageUtils.ts';
 import {
   ShoppingBag,
   Clock,
@@ -257,9 +258,16 @@ export const BuyRequestsPage: React.FC<BuyRequestsPageProps> = ({
 
                   <div className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center space-x-4 min-w-0">
-                      {req.productImageUrl && (
+                      {req.productImageUrl ? (
                         <img
                           src={req.productImageUrl}
+                          alt={req.productTitle}
+                          onError={handleImageFallback}
+                          className="w-16 h-16 rounded-xl object-cover shrink-0 border border-stone-200"
+                        />
+                      ) : (
+                        <img
+                          src={DEFAULT_ART_IMAGE}
                           alt={req.productTitle}
                           className="w-16 h-16 rounded-xl object-cover shrink-0 border border-stone-200"
                         />

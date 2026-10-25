@@ -29,6 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, unreadC
 
   const navItems = [
     { id: 'marketplace', label: 'Marketplace', icon: ShoppingBag, public: true },
+    { id: 'studio-3d', label: '3D Studio', icon: Palette, public: true },
     { id: 'sell', label: 'Sell / My Listings', icon: PlusCircle, public: false },
     { id: 'swaps', label: 'Swap Requests', icon: Repeat, public: false },
     { id: 'deals', label: 'Buy Requests', icon: DealsIcon, public: false },

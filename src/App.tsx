@@ -16,6 +16,7 @@ import { ChatPage } from './pages/ChatPage.tsx';
 import { DashboardPage } from './pages/DashboardPage.tsx';
 import { AdminPanelPage } from './pages/AdminPanelPage.tsx';
 import { LoginPage } from './pages/LoginPage.tsx';
+import { Studio3DPage } from './pages/Studio3DPage.tsx';
 
 function MainApp() {
   const { user } = useAuth();
@@ -80,6 +81,14 @@ function MainApp() {
             onViewProduct={handleViewProduct}
             onInitiateSwap={handleViewProduct}
             onNavigate={navigateTo}
+          />
+        )}
+
+        {currentPage === 'studio-3d' && (
+          <Studio3DPage
+            initialProductId={selectedProductId || undefined}
+            onNavigate={navigateTo}
+            onViewProduct={handleViewProduct}
           />
         )}
 

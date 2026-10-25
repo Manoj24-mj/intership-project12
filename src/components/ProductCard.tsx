@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../types/index.ts';
 import { formatINR } from '../utils/rules.ts';
+import { getCategoryFallbackImage } from '../utils/imageUtils.ts';
 import { MapPin, Tag, Eye, Repeat } from 'lucide-react';
 
 interface ProductCardProps {
@@ -46,15 +47,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     );
   };
 
-  const fallbackImage =
-    'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80';
+  const fallbackImage = getCategoryFallbackImage(product.category);
 
   return (
     <div className="group bg-white rounded-xl border border-stone-200/90 overflow-hidden shadow-xs hover:shadow-md hover:border-amber-700/40 transition-all flex flex-col h-full">
       {/* Product Image Frame */}
       <div className="relative aspect-4/3 bg-stone-100 overflow-hidden">
         <img
-          src={imageError ? fallbackImage : product.imageUrl}
+          src={imageError || !product.imageUrl ? fallbackImage : product.imageUrl}
           alt={product.title}
           onError={() => setImageError(true)}
           className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
