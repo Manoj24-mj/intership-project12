@@ -279,22 +279,40 @@ ArtLoop addresses art student financial constraints and studio waste by providin
 
 ## 12. Deployment Instructions
 
-### Deploy Frontend to Vercel
-1. Push repository to GitHub.
-2. In Vercel, import the repository.
-3. Set Framework Preset to **Vite**.
-4. Configure Build Command: `npm run build` and Output Directory: `dist`.
-5. Under Environment Variables, add: `VITE_API_URL=https://<your-render-backend-url>`.
+### Option A: Complete Full-Stack Deployment on Vercel (Recommended & Ready)
+ArtLoop includes native Vercel serverless integration (`api/index.ts` and `vercel.json`). You can deploy the complete frontend and backend directly to Vercel in one step:
 
-### Deploy Backend to Render
-1. Create a **New Web Service** on Render.
-2. Connect your GitHub repository.
-3. Build Command: `npm install && npm run build`
-4. Start Command: `npm start`
-5. Add Environment Variables:
-   - `MONGODB_URI`: Your MongoDB Atlas cluster connection string.
-   - `SESSION_SECRET`: A secure random string.
+1. Push this codebase to your GitHub repository.
+2. In the [Vercel Dashboard](https://vercel.com), click **Add New Project** and import the repository.
+3. Framework Preset: **Vite** (Vercel automatically detects this).
+4. Build Settings:
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+5. In **Environment Variables**, add:
+   - `MONGODB_URI`: `mongodb+srv://pmnagapapa_db_user:<password>@arts.12dxmg8.mongodb.net/artloop?retryWrites=true&w=majority`
+   - `SESSION_SECRET`: Any secure random passphrase (e.g. `artloop_production_session_secret_2026`)
    - `NODE_ENV`: `production`
+6. Click **Deploy**. Vercel will build your React SPA and host the Express REST API as serverless functions with zero configuration!
+
+### Option B: Frontend on Vercel + Backend on Render
+If you prefer running a continuous Node.js server on Render with the client on Vercel:
+
+1. **Deploy Backend to Render:**
+   - Create a **New Web Service** on Render and connect your GitHub repo.
+   - Build Command: `npm install && npm run build`
+   - Start Command: `npm start`
+   - Environment Variables:
+     - `MONGODB_URI`: Your MongoDB Atlas connection URI.
+     - `SESSION_SECRET`: A secure random string.
+     - `NODE_ENV`: `production`
+     - `PORT`: `10000` (Render default)
+   - Copy your Render service URL (e.g., `https://artloop-api.onrender.com`).
+
+2. **Deploy Frontend to Vercel:**
+   - Import your GitHub repo on Vercel.
+   - Set Environment Variable:
+     - `VITE_API_URL`: `https://artloop-api.onrender.com`
+   - Click **Deploy**. The frontend will automatically route all `/api` requests to Render with credentials and CORS headers enabled.
 
 ---
 

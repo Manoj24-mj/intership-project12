@@ -21,6 +21,23 @@ async function startServer() {
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 
+  // CORS handling for Vercel / cross-origin deployments
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
+    next();
+  });
+
   // Initialize DB (MongoDB Atlas or resilient embedded fallback)
   await initDatabase();
 

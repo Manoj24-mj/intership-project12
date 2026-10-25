@@ -9,7 +9,11 @@ import {
   AdminStats,
 } from '../types/index.ts';
 
-const BASE_URL = '/api';
+const API_HOST = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL
+  ? (import.meta.env.VITE_API_URL as string).replace(/\/$/, '')
+  : '';
+
+const BASE_URL = `${API_HOST}/api`;
 
 function getHeaders(): HeadersInit {
   const headers: Record<string, string> = {

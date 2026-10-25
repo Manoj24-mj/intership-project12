@@ -57,17 +57,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
 
-          {/* Safety & Local Community */}
-          <div>
-            <h4 className="text-white text-xs font-semibold uppercase tracking-wider mb-3">Community Hub</h4>
-            <p className="text-xs text-stone-400 leading-relaxed mb-3">
-              Direct peer-to-peer exchanges in Bengaluru, Yelahanka, Rajanukunte, and college campuses.
-              Always inspect art materials in person before finalizing payments.
-            </p>
-            <div className="inline-flex items-center text-xs text-amber-200/90 font-medium bg-stone-800 px-2.5 py-1.5 rounded border border-stone-700">
-              <span>Zero Platform Commission</span>
+            {/* Safety & Local Community */}
+            <div>
+              <h4 className="text-white text-xs font-semibold uppercase tracking-wider mb-3">Community Hub</h4>
+              <p className="text-xs text-stone-400 leading-relaxed mb-3">
+                Direct peer-to-peer exchanges in Bengaluru, Yelahanka, Rajanukunte, and college campuses.
+                Inspired by the creative learning ethos of institutions like the National Institute of Design, Lalit Kala Akademi, and the International Society of Education Through Art.
+              </p>
+              <div className="inline-flex items-center text-xs text-amber-200/90 font-medium bg-stone-800 px-2.5 py-1.5 rounded border border-stone-700">
+                <span>Zero Platform Commission • Sustainable Reuse</span>
+              </div>
             </div>
-          </div>
         </div>
 
         <div className="border-t border-stone-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400">

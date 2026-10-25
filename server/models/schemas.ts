@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 // User Schema
 export interface IUser extends Document {
+  id: string;
   name: string;
   email: string;
   passwordHash: string;
@@ -14,6 +15,7 @@ export interface IUser extends Document {
 
 export const UserSchema = new Schema<IUser>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     passwordHash: { type: String, required: true },
@@ -26,6 +28,7 @@ export const UserSchema = new Schema<IUser>(
 
 // Product Schema
 export interface IProduct extends Document {
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -42,6 +45,7 @@ export interface IProduct extends Document {
 
 export const ProductSchema = new Schema<IProduct>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
     category: {
@@ -78,6 +82,7 @@ export const ProductSchema = new Schema<IProduct>(
 
 // Buy Request / Transaction Schema
 export interface IBuyRequest extends Document {
+  id: string;
   productId: string;
   buyerId: string;
   buyerName?: string;
@@ -94,6 +99,7 @@ export interface IBuyRequest extends Document {
 
 export const BuyRequestSchema = new Schema<IBuyRequest>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     productId: { type: String, required: true },
     buyerId: { type: String, required: true },
     buyerName: { type: String },
@@ -114,6 +120,7 @@ export const BuyRequestSchema = new Schema<IBuyRequest>(
 
 // Swap Request Schema
 export interface ISwapRequest extends Document {
+  id: string;
   requestedProductId: string;
   offeredProductId: string;
   requesterId: string;
@@ -132,6 +139,7 @@ export interface ISwapRequest extends Document {
 
 export const SwapRequestSchema = new Schema<ISwapRequest>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     requestedProductId: { type: String, required: true },
     offeredProductId: { type: String, required: true },
     requesterId: { type: String, required: true },
@@ -154,6 +162,7 @@ export const SwapRequestSchema = new Schema<ISwapRequest>(
 
 // Conversation Schema
 export interface IConversation extends Document {
+  id: string;
   participantIds: string[];
   participantNames?: Record<string, string>;
   productId?: string;
@@ -166,6 +175,7 @@ export interface IConversation extends Document {
 
 export const ConversationSchema = new Schema<IConversation>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     participantIds: [{ type: String, required: true }],
     participantNames: { type: Map, of: String },
     productId: { type: String },
@@ -178,6 +188,7 @@ export const ConversationSchema = new Schema<IConversation>(
 
 // Message Schema
 export interface IMessage extends Document {
+  id: string;
   conversationId: string;
   senderId: string;
   senderName: string;
@@ -187,6 +198,7 @@ export interface IMessage extends Document {
 
 export const MessageSchema = new Schema<IMessage>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     conversationId: { type: String, required: true },
     senderId: { type: String, required: true },
     senderName: { type: String, required: true },
@@ -197,6 +209,7 @@ export const MessageSchema = new Schema<IMessage>(
 
 // Listing Report Schema
 export interface IReport extends Document {
+  id: string;
   productId: string;
   productTitle: string;
   reporterId: string;
@@ -208,6 +221,7 @@ export interface IReport extends Document {
 
 export const ReportSchema = new Schema<IReport>(
   {
+    id: { type: String, required: true, unique: true, index: true },
     productId: { type: String, required: true },
     productTitle: { type: String, required: true },
     reporterId: { type: String, required: true },
