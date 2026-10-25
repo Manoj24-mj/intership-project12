@@ -23,6 +23,8 @@ interface MarketplacePageProps {
 
 const CATEGORIES = [
   'All Categories',
+  'Original Paintings & Artworks',
+  'Fine Art & Prints',
   'Paints and Colours',
   'Brushes and Painting Tools',
   'Canvas and Surfaces',
@@ -36,12 +38,20 @@ const CONDITIONS = ['All Conditions', 'New', 'Like New', 'Good', 'Fair'];
 
 const LOCATIONS = [
   'All Locations',
+  'Bengaluru Central',
   'Yelahanka',
   'Rajanukunte',
-  'Bengaluru Central',
   'Malleshwaram',
   'Indiranagar',
   'Koramangala',
+  'New York',
+  'Chicago',
+  'Los Angeles',
+  'Miami',
+  'Toronto',
+  'Montreal',
+  'Vancouver',
+  'Calgary',
 ];
 
 export const MarketplacePage: React.FC<MarketplacePageProps> = ({

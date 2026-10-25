@@ -24,6 +24,8 @@ interface SellAndMyListingsPageProps {
 }
 
 const CATEGORIES = [
+  'Original Paintings & Artworks',
+  'Fine Art & Prints',
   'Paints and Colours',
   'Brushes and Painting Tools',
   'Canvas and Surfaces',
@@ -36,11 +38,12 @@ const CATEGORIES = [
 const CONDITIONS = ['New', 'Like New', 'Good', 'Fair'];
 
 const SAMPLE_IMAGE_SUGGESTIONS = [
+  { label: 'Original Art', url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
   { label: 'Paints & Colours', url: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80' },
   { label: 'Brushes', url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
   { label: 'Canvas', url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80' },
   { label: 'Sketchbook', url: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80' },
-  { label: 'Drawing Pencils', url: 'https://images.unsplash.com/photo-1585336261024-64ed7d013cd1?auto=format&fit=crop&w=800&q=80' },
+  { label: 'Drawing Tools', url: 'https://images.unsplash.com/photo-1585336261024-64ed7d013cd1?auto=format&fit=crop&w=800&q=80' },
 ];
 
 export const SellAndMyListingsPage: React.FC<SellAndMyListingsPageProps> = ({

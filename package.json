@@ -1,7 +1,7 @@
 {
-  "name": "react-example",
+  "name": "artloop-marketplace",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
@@ -11,6 +11,7 @@
     "test": "tsx --test src/utils/rules.test.ts",
     "seed:admin": "tsx scripts/seedAdmin.ts",
     "seed:products": "tsx scripts/seedProducts.ts",
+    "seed:dataset": "tsx scripts/seedFromDataset.ts",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
   },

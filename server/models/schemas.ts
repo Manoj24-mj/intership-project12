@@ -51,15 +51,7 @@ export const ProductSchema = new Schema<IProduct>(
     category: {
       type: String,
       required: true,
-      enum: [
-        'Paints and Colours',
-        'Brushes and Painting Tools',
-        'Canvas and Surfaces',
-        'Sketchbooks and Paper',
-        'Drawing and Sketching Tools',
-        'Craft Supplies',
-        'Other Art Materials',
-      ],
+      trim: true,
     },
     condition: {
       type: String,
