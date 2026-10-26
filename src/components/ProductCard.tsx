@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product } from '../types/index.ts';
 import { formatINR } from '../utils/rules.ts';
-import { getCategoryFallbackImage } from '../utils/imageUtils.ts';
+import { getCategoryFallbackImage, handleImageFallback } from '../utils/imageUtils.ts';
 import { MapPin, Tag, Eye, Repeat } from 'lucide-react';
 
 interface ProductCardProps {
@@ -15,8 +15,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onViewDetails,
   onQuickSwap,
 }) => {
-  const [imageError, setImageError] = useState(false);
-
   // Condition color accents
   const conditionStyles: Record<string, string> = {
     New: 'bg-emerald-50 text-emerald-800 border-emerald-200',
@@ -54,9 +52,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Product Image Frame */}
       <div className="relative aspect-4/3 bg-stone-100 overflow-hidden">
         <img
-          src={imageError || !product.imageUrl ? fallbackImage : product.imageUrl}
+          src={product.imageUrl || fallbackImage}
           alt={product.title}
-          onError={() => setImageError(true)}
+          onError={(e) => handleImageFallback(e, product.category)}
           className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
           loading="lazy"
         />
